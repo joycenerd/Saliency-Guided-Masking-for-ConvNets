@@ -18,6 +18,7 @@ Our paper addresses the challenge of incorporating masking operations into contr
 ## Setup
 ```bash
 conda env create --file environment.yml -n mask
+conda activate mask
 ```
 
 ## Data Preparation
@@ -47,13 +48,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python main_moco.py \
     --lr 0.015 --batch-size 128 --epochs 200 \
     --dist-url 'tcp://localhost:10001' --multiprocessing-distributed --world-size 1 \
     --rank 0 --mlp --moco-t 0.2 --aug-plus --cos \
-    --save-dir {RES&LOG_SAVE_PATH} \
+    --save-dir {RES_AND_LOG_SAVE_PATH} \
     --alpha 2.0 --num-nonsem 1 \
     --strategy hp \
     {DATA_PATH}
 ```
 
-- If you are using 8 GPU machine set `--lr 0.015 --batch-size 128`, 4 GPU machine set `--lr 0.03 --batch-size 256`
+- If you are using a 4 GPU machine set `--lr 0.015 --batch-size 128`, 8 GPU machine set `--lr 0.03 --batch-size 256`
 - `--alpha`: hard negative weight
 - `--num-nonsem`: how many hard negative views per qk pair
 - `--strategy`: choose 1 masking stratgey setting from: hp, blur, and mean
